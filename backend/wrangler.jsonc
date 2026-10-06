@@ -4,6 +4,6 @@
   "compatibility_date": "2026-05-22",
   "account_id": "76afbd7645e86631d086edd4ff93337f",
   "workers_dev": true,
-  "d1_databases": [{"binding":"DB","database_name":"tracy-reznik-access","database_id":"CONFIGURE_AFTER_CREATION"}]
+  "d1_databases": [{"binding":"DB","database_name":"tracy-reznik-access","database_id":"dcb03007-dd5b-41ea-baf8-a8fcba931adf"}]
 }
 
