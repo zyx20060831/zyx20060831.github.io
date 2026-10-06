@@ -2,7 +2,7 @@
 
 公开页面位于 `public/`，后端位于 `backend/`。GitHub 仓库保存公开页面和不含私人数据的后端代码。
 
-当前状态：Cloudflare 授权成功，D1 已创建并初始化，Worker 已部署，受限资料已存入 Worker Secret。生产健康检查返回 200，匿名受限页面返回 401 且没有受限值。GitHub OAuth 应用已创建，Client ID 已配置，Client secret 尚待用户生成。GitHub Pages 已设置为 main 分支的 /docs 目录；完整登录验证仍待完成。原 Sites 网站继续服务。
+当前状态：迁移已上线。公开主页为 https://zyx20060831.github.io/ ，GitHub Pages 来源为 main 分支的 /docs。Cloudflare D1 / Worker 和 GitHub OAuth 凭据已配置，受限资料保存于 Worker Secret。生产 GitHub OAuth 回调、管理员登录及审批页面均已验证成功。原 Sites 网站继续服务。
 
 后端地址：`https://tracy-reznik-access.kuoyi-0705.workers.dev`。
 
@@ -23,15 +23,15 @@ GitHub OAuth 应用名称：`Tracy Reznik Access`；主页：`https://zyx2006083
 
 1. 已创建 `tracy-reznik-access` D1，并将数据库 ID 填入 `backend/wrangler.jsonc`。
 2. 已初始化数据库并部署 Worker；后续代码变更可在 `backend/` 运行 `npm ci` 和 `npm run deploy`。
-3. 创建 GitHub OAuth App：主页 `https://zyx20060831.github.io/`；回调地址为部署结果的实际后端域名加 `/auth/callback`。
-4. `GITHUB_CLIENT_ID` 和 `PRIVATE_PROFILE_JSON` 已配置。生成 GitHub Client secret 后，通过 Cloudflare 的秘密设置或 `wrangler secret put` 配置 `GITHUB_CLIENT_SECRET`；不在仓库中保存真实值。
+3. 已创建 GitHub OAuth App：主页 `https://zyx20060831.github.io/`；回调地址 `https://tracy-reznik-access.kuoyi-0705.workers.dev/auth/callback`。
+4. `GITHUB_CLIENT_ID`、`GITHUB_CLIENT_SECRET` 和 `PRIVATE_PROFILE_JSON` 均已配置于 Cloudflare。真实密钥和受限资料不在仓库中保存。
 5. `PRIVATE_PROFILE_JSON` 格式为 `{ "information": [{ "label": "字段", "value": "内容" }], "education": [{ "period": "年份", "school": "学校", "description": "说明" }] }`。
 6. 公开页面已接入实际后端地址。
 7. 公开文件已放入 `docs/`，Pages 来源已设置为 `main` 分支的 `/docs`。
-8. 验证管理员登录、访客申请、批准、拒绝、撤销，以及未批准者无法读取受限值，再交付新网址。
+8. 管理员使用自己的 GitHub 账号登录，进入后端 `/admin` 审批访客。公开内容可通过聊天修改或直接修改仓库 `docs/index.html` 后发布。
 
 ## 已验证
 
 真实 Workers 本地运行时 + D1 权限测试：匿名访问、伪造身份头、过期会话、访客管理员隔离、跨站请求与 CSRF、批准和撤销、申请说明 HTML 转义、OAuth state / PKCE、退出登录。
 
-生产匿名访问验证通过。完整 GitHub OAuth 回调和管理员登录仍需完成登录凭据配置后验证。
+生产验证：公开主页正常展示全部四栏和插画版权信息；匿名受限访问返回 401、不含受限值；真实 GitHub OAuth 回调成功，账号 `zyx20060831` 被识别为管理员，可查看受限资料并打开申请管理页面。尚未使用第二个真实 GitHub 账号完成访客全流程；访客申请、批准及撤销逻辑已由本地 Workers + D1 测试覆盖。
