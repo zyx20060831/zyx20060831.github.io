@@ -1,0 +1,11 @@
+{
+  "name": "tracy-reznik-access",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:apply": "wrangler d1 execute tracy-reznik-access --remote --file schema.sql"
+  },
+  "devDependencies": {"wrangler":"4.92.0"}
+}
