@@ -10,3 +10,4 @@ body{background-image:url('/background-ai-v2.png');background-position:center;ba
 .nav,.eyebrow,.section-label,.about-copy p,.info-list dt,.status,.education-period,.education-list p,.moments-toolbar p,.moment-time,.moments-empty,.moments-error,.moments-footnote,.moments-status,.questions-note,.question-author,.info-list a.webmail{color:#384054}
 .signin,.mark,.moment-avatar{text-shadow:none}
 .moment-card,.question-card,.moments-empty,.moments-error,.access-panel{border-color:#59637866}
+@media(max-width:900px){body{background-position:right center}}
