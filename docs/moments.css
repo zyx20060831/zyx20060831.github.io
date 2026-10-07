@@ -5,7 +5,7 @@
 .info-list a.webmail{display:inline-block;font-size:14px;margin-left:12px;color:#667086}
 
 /* Show the illustration without the former left-to-right white overlay. */
-body{background-image:url('/background.jpg');background-position:center;background-size:cover;background-attachment:fixed;--muted:#384054;--line:#59637866;text-shadow:0 1px 2px #fff,0 0 5px #ffffffb3}
+body{background-image:url('/background-ai-v2.png');background-position:center;background-size:cover;background-attachment:fixed;--muted:#384054;--line:#59637866;text-shadow:0 1px 2px #fff,0 0 5px #ffffffb3}
 .access-panel,.moment-card,.question-card,.moments-empty,.moments-error,.question-named,.moments-more{background:transparent;backdrop-filter:none}
 .nav,.eyebrow,.section-label,.about-copy p,.info-list dt,.status,.education-period,.education-list p,.moments-toolbar p,.moment-time,.moments-empty,.moments-error,.moments-footnote,.moments-status,.questions-note,.question-author,.info-list a.webmail{color:#384054}
 .signin,.mark,.moment-avatar{text-shadow:none}
