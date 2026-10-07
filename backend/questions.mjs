@@ -48,7 +48,9 @@ export async function questionPublicRoute(request,context){
   if(!validKey(key))return page('提问不存在','<p>请检查你的查询链接。</p>',404);
   const row=await env.DB.prepare('SELECT question,answer,anonymous,author_login,created_at,archived FROM questions WHERE lookup_hash=?').bind(await digest(key)).first();
   if(!row)return page('提问不存在','<p>请检查你的查询链接。</p>',404);
-  return page('你的提问',`<p class="notice">提问已收到。</p><p><small>请收藏这个页面。查询链接仅属于你，请勿转发。</small></p><section><small>${escape(author(row))} · ${date(row.created_at)}</small><p class="reason">${escape(row.question)}</p><h2>Tracy 的回复</h2>${row.answer?`<p class="reason">${escape(row.answer)}</p>`:`<p>${row.archived?'这条提问已关闭。':'还没有回复，稍后再来看看。'}</p>`}</section><a href="/questions/ask?mode=anonymous">再问一个问题</a>`);
+  const response=page('你的提问',`<p class="notice">提问已收到。</p><p><small>请收藏这个页面。查询链接仅属于你，请勿转发。</small></p><section><small>${escape(author(row))} · ${date(row.created_at)}</small><p class="reason">${escape(row.question)}</p><h2>Tracy 的回复</h2>${row.answer?`<p class="reason">${escape(row.answer)}</p>`:`<p>${row.archived?'这条提问已关闭。':'还没有回复，稍后再来看看。'}</p>`}</section><a href="/questions/ask?mode=anonymous">再问一个问题</a>`);
+  // The lookup token stays out of all subsequent referrer headers.
+  response.headers.set('Referrer-Policy','no-referrer');return response;
  }
  return null;
 }
